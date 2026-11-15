@@ -8,7 +8,7 @@ Before a stable 1.0:
 2. Add a Windows/macOS/Linux extractor comparison harness in isolated temporary directories, clearly separating metadata policy from extractor-specific behavior.
 3. Fuzz parser entry points under external CPU/RSS limits and publish seeds and reproduction instructions.
 4. Add versioned policy configuration and explicit, reviewable exceptions with expiry/reasons. Never silently skip an unsupported member.
-5. Validate the SARIF output against the upstream schema and exercise an actual upload integration.
+5. SARIF output validates against the upstream schema (see VALIDATION.md); exercise an actual upload integration.
 6. Measure peak RSS and wall time for budget-boundary inputs and choose production limits from evidence.
 7. Independent security review and a documented support/release process.
 
