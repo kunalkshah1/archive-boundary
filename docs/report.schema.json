@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "archive-boundary CLI JSON report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reports"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "reports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "schema_version",
+          "archive",
+          "limits",
+          "sha256",
+          "format",
+          "complete",
+          "members",
+          "declared_bytes",
+          "findings",
+          "status"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": 1
+          },
+          "archive": {
+            "type": "string"
+          },
+          "limits": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "input_bytes",
+              "tar_bytes",
+              "members",
+              "name_chars",
+              "member_bytes",
+              "content_bytes",
+              "findings"
+            ],
+            "properties": {
+              "input_bytes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "tar_bytes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "members": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "name_chars": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "member_bytes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "content_bytes": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "findings": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "sha256": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            ]
+          },
+          "format": {
+            "enum": [
+              null,
+              "zip",
+              "tar",
+              "tar.gz"
+            ]
+          },
+          "complete": {
+            "type": "boolean"
+          },
+          "members": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "declared_bytes": {
+            "type": "integer"
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "rule",
+                "member",
+                "message"
+              ],
+              "properties": {
+                "rule": {
+                  "enum": [
+                    "AB001",
+                    "AB002",
+                    "AB003",
+                    "AB004",
+                    "AB005",
+                    "AB006",
+                    "AB007",
+                    "AB008",
+                    "AB009"
+                  ]
+                },
+                "member": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail",
+              "incomplete"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

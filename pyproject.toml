@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "archive-boundary"
+version = "0.1.0"
+description = "Offline release archive checks for portable paths and extraction hazards"
+requires-python = ">=3.11"
+readme = "README.md"
+license = "MIT"
+authors = [{name = "Kunal Shah"}]
+classifiers = ["Development Status :: 3 - Alpha", "Programming Language :: Python :: 3"]
+
+[project.optional-dependencies]
+dev = ["ruff==0.17.5", "jsonschema==4.26.0", "build==1.6.1"]
+
+[project.scripts]
+archive-boundary = "archive_boundary.cli:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
