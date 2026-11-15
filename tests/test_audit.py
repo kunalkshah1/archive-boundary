@@ -32,7 +32,10 @@ class ArchiveTests(unittest.TestCase):
             with warnings.catch_warnings(), zipfile.ZipFile(path, "w") as archive:
                 warnings.simplefilter("ignore", UserWarning)
                 for name in names:
-                    archive.writestr(name, b"x")
+                    entry = zipfile.ZipInfo(name)
+                    # Windows ZipInfo normalizes backslashes. Preserve the hostile fixture bytes.
+                    entry.filename = name
+                    archive.writestr(entry, b"x")
         else:
             with tarfile.open(path, "w:gz") as archive:
                 for name in names:
